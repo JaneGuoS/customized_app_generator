@@ -9,7 +9,7 @@ from djadmin2.site import djadmin2_site
 from djadmin2.types import Admin2TabularInline, ModelAdmin2
 from .actions import (CustomPublishAction, PublishAllItemsAction,
                       unpublish_items, unpublish_all_items)
-from .models import Channel, Post, Comment
+from .models import Channel, Post, Comment, Relation, Control
 
 
 class CommentInline(Admin2TabularInline):
@@ -54,6 +54,15 @@ class CommentAdmin(ModelAdmin2):
     actions_on_bottom = True
     actions_selection_counter = False
 
+class RelationAdmin(ModelAdmin2):
+    actions_on_top = True
+    actions_on_bottom = True
+    actions_selection_counter = False
+
+class ControlAdmin(ModelAdmin2):
+    actions_on_top = True
+    actions_on_bottom = True
+    actions_selection_counter = False
 
 # Register the blog app with a verbose name
 djadmin2_site.register_app_verbose_name(
@@ -65,3 +74,5 @@ djadmin2_site.register_app_verbose_name(
 djadmin2_site.register(Channel, ChannelAdmin)
 djadmin2_site.register(Post, PostAdmin)
 djadmin2_site.register(Comment, CommentAdmin)
+djadmin2_site.register(Relation, RelationAdmin)
+djadmin2_site.register(Control, ControlAdmin)

@@ -1,12 +1,33 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+
+class Control(models.Model):
+    business_id = models.IntegerField(verbose_name=_('businessId'))
+    control_type = models.CharField(max_length=255, verbose_name=_('controlType')) 
+    control_id = models.IntegerField(verbose_name=_('controlId')) 
+    entity_id = models.IntegerField(verbose_name=_('entityId')) 
+
+    class Meta:
+        verbose_name = _('control')
+        verbose_name_plural = _('controls')
+
+class Relation(models.Model):
+    business_id = models.IntegerField(verbose_name=_('businessId'))
+    relation_type = models.CharField(max_length=255, verbose_name=_('relationType')) 
+    parent_id = models.IntegerField(verbose_name=_('parentId')) 
+    entity_id = models.IntegerField(verbose_name=_('entityId')) 
+
+    class Meta:
+        verbose_name = _('relation')
+        verbose_name_plural = _('relations')
+
 class Post(models.Model):
     title = models.CharField(max_length=255, verbose_name=_('title'))
     body = models.TextField(verbose_name=_('body'))
     published = models.BooleanField(default=False, verbose_name=_('published'))
     published_date = models.DateField(blank=True, null=True)
-
+    
     def __str__(self):
         return self.title
 
@@ -20,14 +41,14 @@ class Channel(models.Model):
     status = models.CharField(max_length=255, verbose_name=_('status')) 
     created_date = models.DateField(blank=True, null=True)
     count = models.IntegerField(verbose_name=_('count'))
-
+    
+      
     def __str__(self):
         return self.title
 
     class Meta:
         verbose_name = _('channel')
         verbose_name_plural = _('channels')
-
 
 class Comment(models.Model):
     post = models.ForeignKey(

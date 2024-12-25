@@ -17,14 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path,include
 
-from blog.views import BlogDetailView, BlogListView
+from blog import views
+from blog.views import BlogDetailView, BlogListView, ChannelListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(
         r"^main/",
-        BlogListView.as_view(template_name="blog/blog_list.html"),
-        name="blog_list",
+        views.blog_list,
+        # ChannelListView.as_view(template_name="blog/blog_list.html"),
+        # name="blog_list",
     ),
     re_path(
         r"^detail(?P<pk>\d+)/$",
